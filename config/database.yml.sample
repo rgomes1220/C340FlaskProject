@@ -1,0 +1,6 @@
+database:
+  host: classmysql.engr.oregonstate.edu
+  user: cs340_user
+  password: last_4
+  db: cs340_user
+  charset: utf8mb4
