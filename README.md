@@ -44,6 +44,6 @@ npm install forever
 
 ## Mysql for flask
 
-https://pymysql.readthedocs.io/en/latest/index.html
-https://github.com/PyMySQL/PyMySQL
-https://www.python.org/dev/peps/pep-0249/#cursor-objects
+* https://pymysql.readthedocs.io/en/latest/index.html
+* https://github.com/PyMySQL/PyMySQL
+* https://www.python.org/dev/peps/pep-0249/#cursor-objects
