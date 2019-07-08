@@ -1,8 +1,10 @@
-# Project Outline
+# CS 340 Project Step 1: Project Outline + Database Outline
 
-Our project will be a simple veterinary practice management database.
+# A. Project Outline
 
-# Database Outline
+Our project will be a simple veterinary practice management database. As part of the project, we will look to keep track of pets as they make visits to the vet to receive standard vaccinations. Additionally, we will be able to keep track of the owners(s) of the pets and miscellaneous details about the visits made. This project will attempt to follow a standard model that should be replicable in similar veterinary practice settings.
+
+# B. Database Outline (in words)
 
 ## Owners
 
@@ -12,10 +14,16 @@ Owners will represent people who have pets.
 
 ### Attributes
 
-* First name - text (required)
-* Last name - text
-* Email - text
-* Phone - text (required)
+* Id - integer (required)
+    * Automatically assigned number serving as the primary key of the table. No business meaning
+* First_Name - varchar(25) (required)
+    * First name of the owner
+* Last_Name - varchar(25)
+    * Last name of the owner
+* Email - varchar(50)
+    * The owner's preferred contact email address.
+* Phone - varchar(15) (required)
+    * The owner's preferred contact phone.
 
 ### Relationships
 
@@ -34,10 +42,16 @@ The Comment column will have arbitrary additional notes about the description or
 
 ### Attributes
 
-* Name - text (required)
+* Id - integer (required)
+    * Automatically assigned number serving as the primary key of the table. No business meaning
+* Name - varchar(25) (required)
+    * Preferred name of the pet
 * Birthdate - date (required)
-* Pet Type - text (required)
-* Comment - text
+    * Date of birth of the pet. Set to 12-31-9999 if unknown.
+* Pet_Type - varchar(25) (required)
+    * Friendly description of the breed (dog, cat, fish, etc...)
+* Comment - varchar(256)
+    * Additional details about the pet
 
 ### Relationships
 
@@ -59,10 +73,18 @@ The notes are arbitrary text encapsulating the details/reasons/results of the vi
 
 ### Attributes
 
-* Visit time - datetime (required)
-* Owner ID - int (required)
-* Pet ID - int (required)
-* Notes - text (required)
+* Id - integer (required)
+    * Automatically assigned number serving as the primary key of the table. No business meaning
+* checkin_time - datetime (required)
+    * Timestamp of when the visit was checked in to by the owner/pet
+* scheduled_time - datetime (required)
+    * Timestamp when the visit was scheduled.
+* Owner_ID - int (required)
+    * Foreign key to the owner associated with the visit.
+* Pet_ID - int (required)
+    * Foreign key to the pet associated with the visit.
+* Notes - varchar(256) (required)
+    * Additional details of the visit.
 
 ### Relationships
 
@@ -78,10 +100,18 @@ The vaccination date records the date of vaccine administration and the expirati
 
 ### Attributes
 
+* Id - integer (required)
+    * Automatically assigned number serving as the primary key of the table. No business meaning
 * Pet ID - int (required)
-* Vaccine - text (required)
-* Vaccination Date - date (required)
-* Expiration Date - date (required)
+    * Foreign key to the pet associated with the vaccination.
+* Vaccine_Name - varchar(25) (required)
+    * Name of the the vaccination.
+* Vaccine_Details - varchar(256)
+    * Description of the the vaccination.
+* Vaccination_Date - date (required)
+    * Date the vaccination was administered.
+* Expiration_Date - date (required)
+    * Date the vaccination expires.
 
 
-# URL to Website
+# C. URL to Website
