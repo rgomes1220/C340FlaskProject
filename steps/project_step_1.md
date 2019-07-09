@@ -1,4 +1,6 @@
 # CS 340 Project Step 1: Project Outline + Database Outline
+## Ryan Gomes - gomesr@oregonstate.edu
+## Kelley Reynolds - kreynolds@oregonstate.edu
 
 # A. Project Outline
 

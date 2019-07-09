@@ -10,10 +10,11 @@ with open("config/database.yml", 'r') as stream:
         print(exc)
         exit(1)
 
+config = config.get('database')
 # Create a connection to MySQL
 connection = pymysql.connect(host=config['host'],
-                            user=config['user'],
-                            password=config['password'],
-                            db=config['db'],
-                            charset=config['charset'],
-                            cursorclass=pymysql.cursors.DictCursor)
+                             user=config['user'],
+                             password=str(config['password']),
+                             db=config['db'],
+                             charset=config['charset'],
+                             cursorclass=pymysql.cursors.DictCursor)

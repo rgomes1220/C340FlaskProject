@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return '<h3>Hello, world</h3>'
+    return '<h3>Hello, world from Flask!</h3>'
 
 @app.route('/diagnostic')
 def diagnostic():
