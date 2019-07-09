@@ -16,5 +16,9 @@ def diagnostic():
     return '<h3>' + str(result) + '</h3>'
 
 if __name__=='__main__':
+    # to run with debug=True, add python shebang (#! /path/to/env/python) to file
+    # https://stackoverflow.com/a/55272071
+    app.run(port=8619, debug=True)
+
+    # to run on flip and access via url, specify host
     #app.run(port=8619, host='flip1.engr.oregonstate.edu')
-    app.run(port=8619)
