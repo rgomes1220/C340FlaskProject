@@ -21,9 +21,12 @@ with open("config/database.yml", 'r') as stream:
 
 config = config.get('database')
 # Create a connection to MySQL
-connection = pymysql.connect(host=config['host'],
+
+def connectMySql():
+    connection = pymysql.connect(host=config['host'],
                              user=config['user'],
                              password=str(config['password']),
                              db=config['db'],
                              charset=config['charset'],
                              cursorclass=pymysql.cursors.DictCursor)
+    return connection
