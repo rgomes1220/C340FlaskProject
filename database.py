@@ -5,7 +5,7 @@ import os
 # change working directory of this file to be able to
 # use relative filepaths (for config/database.yml) correctly
 abspath = os.path.abspath(__file__)
-dirname = os.path.dirname(dirname)
+dirname = os.path.dirname(abspath)
 os.chdir(dirname)
 
 
