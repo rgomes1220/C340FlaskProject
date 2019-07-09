@@ -46,8 +46,8 @@ The Comment column will have arbitrary additional notes about the description or
     * Automatically assigned number serving as the primary key of the table. No business meaning
 * Name - varchar(25) (required)
     * Preferred name of the pet
-* Birthdate - date (required)
-    * Date of birth of the pet. Set to 12-31-9999 if unknown.
+* Birthdate - date
+    * Date of birth of the pet. Null if unknown.
 * Pet_Type - varchar(25) (required)
     * Friendly description of the breed (dog, cat, fish, etc...)
 * Comment - varchar(256)
