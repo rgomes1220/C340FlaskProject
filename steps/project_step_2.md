@@ -2,11 +2,14 @@
 ## Ryan Gomes - gomesr@oregonstate.edu
 ## Kelley Reynolds - reynokel@oregonstate.edu
 
-# A. Project Outline
+# A. Fixes based on Feedback from Step 1
+
+The feedback for Step 1 was positive, no changes were recommended.
+Both of us are experienced with SQL databases so it was not expected that many/any changes would be necessary for the project.
+
+# B. Project Outline and Database Outline - Updated Version
 
 Our project will be a simple veterinary practice management database. As part of the project, we will look to keep track of pets as they make visits to the vet to receive standard vaccinations. Additionally, we will be able to keep track of the owners(s) of the pets and miscellaneous details about the visits made. This project will attempt to follow a standard model that should be replicable in similar veterinary practice settings.
-
-# B. Database Outline (in words)
 
 ## Owners
 
@@ -114,6 +117,3 @@ The vaccination date records the date of vaccine administration and the expirati
     * Date the vaccination was administered.
 * Expiration_Date - date (required)
     * Date the vaccination expires.
-
-
-# C. URL to Website
