@@ -1,4 +1,4 @@
-# CS 340 Project Step 1: Project Outline + Database Outline
+# CS 340 Project Step 2: ERD & Schema
 ## Ryan Gomes - gomesr@oregonstate.edu
 ## Kelley Reynolds - reynokel@oregonstate.edu
 
@@ -117,3 +117,11 @@ The vaccination date records the date of vaccine administration and the expirati
     * Date the vaccination was administered.
 * Expiration_Date - date (required)
     * Date the vaccination expires.
+
+
+
+# C. Entity Relationship Diagram
+![erd](erd.png)
+
+# D. Schema
+![schema](schema.png)
