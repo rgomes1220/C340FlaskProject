@@ -2,6 +2,137 @@
 ## Ryan Gomes - gomesr@oregonstate.edu
 ## Kelley Reynolds - reynokel@oregonstate.edu
 
+# Feedback From Peer Reviewer
+**Gaetan I**
+**ERD**
+* Are the attributes for each entity in the ERD same as that described in the database outline?
+    * No attributes were put in the ERD.
+* Is the participation of entities in the relationships same as that described in the outline?
+    * Yes
+* Is the cardinality of entities in the relationships same as that described in the outline?
+    * Yes
+
+* Based on the Database outline, could any of the relationships be better off described as an Entity instead?
+    * No, all entities and relationships are in their proper place.
+
+* Is there something that could be changed/improved in the ER Diagram and/or the overall database design?
+    * You could possibly make vaccines and pets have a many to many relationship because each type of vaccine can be administered to more than one pet, but then you would have to do something with the date attributes. I think it is good as is though.
+
+**Schema**
+
+* Are the relationship tables present where required and correctly defined, when compared with the database outline?
+    * Yes, but the connected lines make it look like vaccinations and visits are related.
+
+* Are foreign keys present where required and correctly defined, when compared with the database outline?
+    * Yes.
+
+* Do the entity attributes match those described in the outline?
+    * Yes.
+
+* Is there something that could be changed/improved in the Schema and/or the overall database design?
+    * Nothing that hasn't been said already.
+
+**Randolph Tucker**
+
+**ERD**
+
+* Are the attributes for each entity in the ERD same as that described in the database outline?
+    * ERD did not include attributes, even the primary keys which were specified.
+
+* Is the participation of entities in the relationships same as that described in the outline?
+    * Yes.
+
+* Is the cardinality of entities in the relationships same as that described in the outline?
+    * Yes.
+
+* Based on the Database outline, could any of the relationships be better off described as an Entity instead?
+    * No.
+
+* Is there something that could be changed/improved in the ER Diagram and/or the overall database design?
+    * It seems right. I am stretching to think of anything. The notes section of the visit captures most of the extraneous details. Maybe a booster date attribute on the vaccination entity to track when a booster would be necessary (rabies every x years, etc).
+
+**Schema**
+* Are the relationship tables present where required and correctly defined, when compared with the database outline?
+    * Yes.
+
+* Are foreign keys present where required and correctly defined, when compared with the database outline?
+    * Yes.
+
+* Do the entity attributes match those described in the outline?
+    * Yes.
+
+* Is there something that could be changed/improved in the Schema and/or the overall database design?
+    * Not really. This is a pretty solid starting block.
+
+**Zhongkai Huang**
+
+**ERD**
+* Are the attributes for each entity in the ERD same as that described in the database outline?
+    * No, i didn't found attribute in the ERD
+
+* Is the participation of entities in the relationships same as that described in the outline?
+    * Yes
+
+* Is the cardinality of entities in the relationships same as that described in the outline?
+    * Yes
+
+* Based on the Database outline, could any of the relationships be better off described as an Entity instead?
+    * No
+
+* Is there something that could be changed/improved in the ER Diagram and/or the overall database design?
+    * add attributes
+
+**Schema**
+* Are the relationship tables present where required and correctly defined, when compared with the database outline?
+    * Yes
+
+* Are foreign keys present where required and correctly defined, when compared with the database outline?
+    * Yes
+
+* Do the entity attributes match those described in the outline?
+    * Yes
+
+* Is there something that could be changed/improved in the Schema and/or the overall database design?
+    * No
+
+**Haofeng Tian**
+**ERD**
+* Are the attributes for each entity in the ERD same as that described in the database outline?
+    * No
+
+* Is the participation of entities in the relationships same as that described in the outline?  
+    * Yes
+
+* Is the cardinality of entities in the relationships same as that described in the outline?
+    * Yes
+
+* Based on the Database outline, could any of the relationships be better off described as an Entity instead?
+    * No
+
+* Is there something that could be changed/improved in the E R Diagram and/or the overall database design?  
+    * Add some attributes for entity would be better
+
+**Schema**
+
+* Are the relationship tables present where required and correctly defined, when compared with the database outline?
+    * Yes
+
+* Are foreign keys present where required and correctly defined, when compared with the database outline?
+    * Yes
+
+* Do the entity attributes match those described in the outline?
+    * Yes
+
+* Is there something that could be changed/improved in the Schema and/or the overall database design?
+    * No
+
+# Actions based on the feedback
+We included the attribute names on the ERD including the primary keys
+
+# Upgrades to the Draft version
+We didn't have any additional upgrades to make from the draft version
+
+
 # A. Fixes based on Feedback from Step 1
 
 The feedback for Step 1 was positive, no changes were recommended.
