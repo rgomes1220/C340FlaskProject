@@ -80,7 +80,7 @@ The notes are arbitrary text encapsulating the details/reasons/results of the vi
 
 * Id - integer (required)
     * Automatically assigned number serving as the primary key of the table. No business meaning
-* checkin_time - datetime (required)
+* checkin_time - datetime
     * Timestamp of when the visit was checked in to by the owner/pet
 * scheduled_time - datetime (required)
     * Timestamp when the visit was scheduled.
@@ -88,7 +88,7 @@ The notes are arbitrary text encapsulating the details/reasons/results of the vi
     * Foreign key to the owner associated with the visit.
 * Pet_ID - int (required)
     * Foreign key to the pet associated with the visit.
-* Notes - varchar(256) (required)
+* Notes - varchar(256)
     * Additional details of the visit.
 
 ### Relationships
