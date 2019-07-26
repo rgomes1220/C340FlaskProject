@@ -33,3 +33,12 @@ select owners.* from pets, owners_pets where owners.id=owners_pets.owner_id and 
 
 -- Find expired vaccinations
 select * from vaccinations where expiration_date<=NOW();
+
+-- Delete a visit
+delete from visits where id=:visit_id;
+
+-- Delete an owner
+delete from owners where id=:owner_id;
+
+-- Unlink an owner from a pet
+delete from owners_pets where owner_id=:owner_id and pet_id=:pet_id;
