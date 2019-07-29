@@ -7,16 +7,16 @@ http://flip1.engr.oregonstate.edu:8619/
 
 # Content from Step 2 giving Database overview
 
-## A. Fixes based on Step 2 Feedback
+## Fixes based on Step 2 Feedback
 We didn't have any additional upgrades to make from the draft version. attribute names were included in the ERD along with primary keys.
 
 
-## A. Fixes based Step 1 Feedback
+## Fixes based Step 1 Feedback
 
 The feedback for Step 1 was positive, no changes were recommended.
 Both of us are experienced with SQL databases so it was not expected that many/any changes would be necessary for the project.
 
-## B. Project Outline and Database Outline - Updated Version
+## Project Outline and Database Outline - Updated Version
 
 Our project will be a simple veterinary practice management database. As part of the project, we will look to keep track of pets as they make visits to the vet to receive standard vaccinations. Additionally, we will be able to keep track of the owners(s) of the pets and miscellaneous details about the visits made. This project will attempt to follow a standard model that should be replicable in similar veterinary practice settings.
 
@@ -129,8 +129,8 @@ The vaccination date records the date of vaccine administration and the expirati
 
 
 
-# C. Entity Relationship Diagram
+# Entity Relationship Diagram
 ![erd](erd.png)
 
-# D. Schema
+# Schema
 ![schema](schema.png)
