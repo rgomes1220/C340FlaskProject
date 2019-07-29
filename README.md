@@ -12,7 +12,7 @@ The schema can be loaded by running the following command (replace the user/data
 
 ```
 mysql -u cs340_osuLogin -p -h classmysql.engr.oregonstate.edu cs340_osuLogin
-source schema.sql
+source ddl_seed.sql
 ```
 
 ## Running
