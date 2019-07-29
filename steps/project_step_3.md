@@ -1,4 +1,4 @@
-# CS 340 Project Step 2: ERD & Schema
+# CS 340 Project Step 3:  Create HTML pages & DML + DDL files
 ## Ryan Gomes - gomesr@oregonstate.edu
 ## Kelley Reynolds - reynokel@oregonstate.edu
 
