@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <h2 style = "text-align: center;">Delete an owner pet relationship</h2>
+
+
+         {% for message in form.owner_id.errors %}
+            <div>{{ message }}</div>
+         {% endfor %}
+         {% for message in form.pet_id.errors %}
+            <div>{{ message }}</div>
+         {% endfor %}
+
+          <form action = "/DeleteOwnerPetRelationship" method = post>
+             <fieldset>
+                <!-- <legend>Contact Form</legend> -->
+                {{ form.hidden_tag() }}
+
+                <div style = font-size:20px; font-weight:bold; margin-left:150px;>
+                   {{ form.owner_id.label }}<br>
+                   {{ form.owner_id }}
+                   <br>
+                   {{ form.pet_id.label }}<br>
+                   {{ form.pet_id }}
+                   <br>
+
+                   {{ form.submit }}
+                </div>
+
+             </fieldset>
+          </form>
+   </body>
+</html>

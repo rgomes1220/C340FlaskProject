@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <h2 style = "text-align: center;">Lookup owners for a pet</h2>
+
+
+         {% for message in form.pet_id.errors %}
+            <div>{{ message }}</div>
+         {% endfor %}
+
+          <form action = "/OwnersForAPet" method = post>
+             <fieldset>
+                <!-- <legend>Contact Form</legend> -->
+                {{ form.hidden_tag() }}
+
+                <div style = font-size:20px; font-weight:bold; margin-left:150px;>
+                   {{ form.pet_id.label }}<br>
+                   {{ form.pet_id }}
+                   <br>
+
+                   {{ form.submit }}
+                </div>
+
+             </fieldset>
+          </form>
+   </body>
+</html>

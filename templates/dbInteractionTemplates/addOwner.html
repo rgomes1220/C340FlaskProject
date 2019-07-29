@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <h2 style = "text-align: center;">Add record for an Owner</h2>
+
+
+         {% for message in form.email.errors %}
+            <div>{{ message }}</div>
+         {% endfor %}
+         {% for message in form.firstname.errors %}
+            <div>{{ message }}</div>
+         {% endfor %}
+         {% for message in form.lastname.errors %}
+            <div>{{ message }}</div>
+         {% endfor %}
+         {% for message in form.phone.errors %}
+            <div>{{ message }}</div>
+         {% endfor %}
+
+          <form action = "/AddOwner" method = post>
+             <fieldset>
+                <!-- <legend>Contact Form</legend> -->
+                {{ form.hidden_tag() }}
+
+                <div style = font-size:20px; font-weight:bold; margin-left:150px;>
+                   {{ form.firstname.label }}<br>
+                   {{ form.firstname }}
+                   <br>
+
+                   {{ form.lastname.label }}<br>
+                   {{ form.lastname }}
+                   <br>
+
+
+                   {{ form.email.label }}<br>
+                   {{ form.email }}
+                   <br>
+
+                   {{ form.phone.label }}<br>
+                   {{ form.phone }}
+                   <br>
+
+                   {{ form.submit }}
+                </div>
+
+             </fieldset>
+          </form>
+   </body>
+</html>

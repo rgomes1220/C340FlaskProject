@@ -70,5 +70,5 @@ npm install forever
 
 This will generate a requirements.txt file if new packages are installed in the environment or if the environment is created from scratch
 ```
-pip freeze --local > ./CS340FlaskProject/requirements.txt
+pip freeze --local > requirements.txt
 ```

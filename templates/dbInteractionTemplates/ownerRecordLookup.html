@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <h2 style = "text-align: center;">Lookup owner by name</h2>
+
+
+         {% for message in form.firstname.errors %}
+            <div>{{ message }}</div>
+         {% endfor %}
+         {% for message in form.lastname.errors %}
+            <div>{{ message }}</div>
+         {% endfor %}
+
+          <form action = "/OwnerRecordLookup" method = post>
+             <fieldset>
+                <!-- <legend>Contact Form</legend> -->
+                {{ form.hidden_tag() }}
+
+                <div style = font-size:20px; font-weight:bold; margin-left:150px;>
+                   {{ form.firstname.label }}<br>
+                   {{ form.firstname }}
+                   <br>
+
+                   {{ form.lastname.label }}<br>
+                   {{ form.lastname }}
+
+                   {{ form.submit }}
+                </div>
+
+             </fieldset>
+          </form>
+   </body>
+</html>

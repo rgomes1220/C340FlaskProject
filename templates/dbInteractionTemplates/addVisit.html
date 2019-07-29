@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <h2 style = "text-align: center;">Add a visit record</h2>
+
+
+         {% for message in form.ownerid.errors %}
+            <div>{{ message }}</div>
+         {% endfor %}
+         {% for message in form.petid.errors %}
+            <div>{{ message }}</div>
+         {% endfor %}
+         {% for message in form.scheduled_time.errors %}
+            <div>{{ message }}</div>
+         {% endfor %}
+
+          <form action = "/AddVisit" method = post>
+             <fieldset>
+                <!-- <legend>Contact Form</legend> -->
+                {{ form.hidden_tag() }}
+
+                <div style = font-size:20px; font-weight:bold; margin-left:150px;>
+                   {{ form.ownerid.label }}<br>
+                   {{ form.ownerid }}
+                   <br>
+
+                   {{ form.petid.label }}<br>
+                   {{ form.petid }}
+                   <br>
+
+                   {{ form.scheduled_time.label }}<br>
+                   {{ form.scheduled_time }}
+                   <br>
+
+                   {{ form.submit }}
+                </div>
+
+             </fieldset>
+          </form>
+   </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <h2 style = "text-align: center;">Update a visit with a checkin time</h2>
+
+
+         {% for message in form.checkin_time.errors %}
+            <div>{{ message }}</div>
+         {% endfor %}
+         {% for message in form.visit_id.errors %}
+            <div>{{ message }}</div>
+         {% endfor %}
+
+          <form action = "/UpdateVisitCheckin" method = post>
+             <fieldset>
+                <!-- <legend>Contact Form</legend> -->
+                {{ form.hidden_tag() }}
+
+                <div style = font-size:20px; font-weight:bold; margin-left:150px;>
+                   {{ form.visit_id.label }}<br>
+                   {{ form.visit_id }}
+                   <br>
+
+                   {{ form.checkin_time.label }}<br>
+                   {{ form.checkin_time }}
+                   <br>
+
+                   {{ form.submit }}
+                </div>
+
+             </fieldset>
+          </form>
+   </body>
+</html>
