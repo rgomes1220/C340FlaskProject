@@ -54,7 +54,8 @@ Run the app with npm forever to allow it to persist once you disconnect from a f
 npm install forever
 ./node_modules/forever/bin/forever start -c python3 ./CS340FlaskProject/app.py
 ```
-
+View running processes: `./node_modules/forever/bin/forever list`
+Stop all running processes: `./node_modules/forever/bin/forever stopall`
 
 
 # Additional Resources

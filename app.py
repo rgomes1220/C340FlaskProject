@@ -1,3 +1,4 @@
+#! /Users/ryagomes/Desktop/Workspace/PythonEnvironments/CS340Databases/bin/python
 import database
 from flask import Flask, render_template, request, flash
 from forms import *
@@ -194,6 +195,18 @@ def DeleteOwnerPetRelationship():
             return render_template('success.html', passed_form_data=request.form)
     elif request.method == 'GET':
         return render_template('dbInteractionTemplates/deleteOwnerPetRelationship.html', form = form)
+
+
+@app.route('/ViewExpiredVaccinations')
+def diagnostic():
+    mysqlConn = database.connectMySql()
+    with mysqlConn.cursor() as cursor:
+        sql='select * from vaccinations where expiration_date<=NOW();'
+        cursor.execute(sql)
+        result = cursor.fetchall()
+        params = result
+
+    return render_template('viewExpiredVaccinations.html', params=params)
 
 
 @app.route('/diagnostic')
