@@ -196,7 +196,6 @@ def AddVaccinationRecord():
                 cursor.execute(insert_stmt, data)
             mysqlConn.commit()
 
-
             return render_template('success.html', passed_form_data=request.form)
     elif request.method == 'GET':
         return render_template('dbInteractionTemplates/addVaccinationRecord.html', form = form)
