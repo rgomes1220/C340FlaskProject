@@ -23,7 +23,7 @@ def AddOwner():
             return render_template('dbInteractionTemplates/addOwner.html', form = form)
         else:
             # insert into owners values (null, :first_name, :last_name, :email, :phone);
-            
+
             mysqlConn = database.connectMySql()
             with mysqlConn.cursor() as cursor:
                 insert_stmt = (
@@ -50,6 +50,20 @@ def AddPet():
             flash('All fields are required.')
             return render_template('dbInteractionTemplates/addPet.html', form = form)
         else:
+
+            mysqlConn = database.connectMySql()
+            with mysqlConn.cursor() as cursor:
+                insert_stmt = (
+                    "insert into pets ( name, birthdate, pet_type, comment)"
+                    "values ( %s, %s, %s, %s);"
+                )
+                data = (request.form["name"],
+                        request.form["birthdate"],
+                        request.form["type"],
+                        request.form["comment"])
+                cursor.execute(insert_stmt, data)
+            mysqlConn.commit()
+
             return render_template('success.html', passed_form_data=request.form)
     elif request.method == 'GET':
         return render_template('dbInteractionTemplates/addPet.html', form = form)
@@ -62,6 +76,20 @@ def AddVisit():
             flash('All fields are required.')
             return render_template('dbInteractionTemplates/addVisit.html', form = form)
         else:
+
+            mysqlConn = database.connectMySql()
+            with mysqlConn.cursor() as cursor:
+                insert_stmt = (
+                    "insert into visits ( owner_id, pet_id, scheduled_time)"
+                    "values ( %s, %s, %s);"
+                )
+                data = ((request.form["ownerid"]),
+                        (request.form["petid"]),
+                        request.form["scheduled_time"].replace("T"," "))
+
+                cursor.execute(insert_stmt, data)
+            mysqlConn.commit()
+
             return render_template('success.html', passed_form_data=request.form)
     elif request.method == 'GET':
         return render_template('dbInteractionTemplates/addVisit.html', form = form)
@@ -74,6 +102,19 @@ def AddOwnerPet():
             flash('All fields are required.')
             return render_template('dbInteractionTemplates/addOwnerPet.html', form = form)
         else:
+
+            mysqlConn = database.connectMySql()
+            with mysqlConn.cursor() as cursor:
+                insert_stmt = (
+                    "insert into owners_pets ( owner_id, pet_id)"
+                    "values ( %s, %s);"
+                )
+                data = ((request.form["ownerid"]),
+                        (request.form["petid"]))
+
+                cursor.execute(insert_stmt, data)
+            mysqlConn.commit()
+
             return render_template('success.html', passed_form_data=request.form)
     elif request.method == 'GET':
         return render_template('dbInteractionTemplates/addOwnerPet.html', form = form)
@@ -88,6 +129,17 @@ def UpdateVisitCheckin():
             flash('All fields are required.')
             return render_template('dbInteractionTemplates/updateVisitCheckin.html', form = form)
         else:
+
+            mysqlConn = database.connectMySql()
+            with mysqlConn.cursor() as cursor:
+                update_stmt = (
+                    "update visits set checkin_time=%s where id=%s;"
+                )
+                data = ((request.form["checkin_time"].replace("T"," ")),
+                        (request.form["visit_id"]))
+                cursor.execute(update_stmt, data)
+            mysqlConn.commit()
+
             return render_template('success.html', passed_form_data=request.form)
     elif request.method == 'GET':
         return render_template('dbInteractionTemplates/updateVisitCheckin.html', form = form)
@@ -101,6 +153,17 @@ def UpdateVisitNotes():
             flash('All fields are required.')
             return render_template('dbInteractionTemplates/updateVisitNotes.html', form = form)
         else:
+
+            mysqlConn = database.connectMySql()
+            with mysqlConn.cursor() as cursor:
+                update_stmt = (
+                    "update visits set notes=%s where id=%s;"
+                )
+                data = ((request.form["notes"]),
+                        (request.form["visit_id"]))
+                cursor.execute(update_stmt, data)
+            mysqlConn.commit()
+
             return render_template('success.html', passed_form_data=request.form)
     elif request.method == 'GET':
         return render_template('dbInteractionTemplates/updateVisitNotes.html', form = form)
@@ -116,6 +179,24 @@ def AddVaccinationRecord():
             flash('All fields are required.')
             return render_template('dbInteractionTemplates/addVaccinationRecord.html', form = form)
         else:
+
+            mysqlConn = database.connectMySql()
+            with mysqlConn.cursor() as cursor:
+                insert_stmt = (
+                    "insert into vaccinations (  pet_id, vaccine_name, vaccine_details, vaccination_date, expiration_date)"
+                    "values ( %s, %s, %s, %s, %s);"
+                )
+
+                data = (request.form["pet_id"],
+                        request.form["vaccine_name"],
+                        request.form["vaccine_details"],
+                        request.form["vaccination_date"],
+                        request.form["expiration_date"])
+
+                cursor.execute(insert_stmt, data)
+            mysqlConn.commit()
+
+
             return render_template('success.html', passed_form_data=request.form)
     elif request.method == 'GET':
         return render_template('dbInteractionTemplates/addVaccinationRecord.html', form = form)

@@ -17,7 +17,7 @@ class AddPetForm(FlaskForm):
     name = TextField("Name",[validators.Required(" name is required.")])
     birthdate = DateField("Birthday", format='%Y-%m-%d', validators=[validators.DataRequired()])
     type = TextField("Type",[validators.Required("Type is required.")])
-    comment = TextField("Phone Number",[validators.Required("comment is required.")])
+    comment = TextField("Comment",[validators.Required("comment is required.")])
 
     submit = SubmitField("Send")
 
