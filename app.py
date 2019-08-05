@@ -1,3 +1,4 @@
+#! /Users/ryagomes/Desktop/Workspace/PythonEnvironments/CS340Databases/bin/python
 import database
 from flask import Flask, render_template, request, flash
 from forms import *
@@ -21,6 +22,21 @@ def AddOwner():
             flash('All fields are required.')
             return render_template('dbInteractionTemplates/addOwner.html', form = form)
         else:
+            # insert into owners values (null, :first_name, :last_name, :email, :phone);
+            
+            mysqlConn = database.connectMySql()
+            with mysqlConn.cursor() as cursor:
+                insert_stmt = (
+                    "insert into owners ( first_name, last_name, email, phone)"
+                    "values ( %s, %s, %s, %s);"
+                )
+                data = (request.form["firstname"],
+                        request.form["lastname"],
+                        request.form["email"],
+                        request.form["phone"])
+                cursor.execute(insert_stmt, data)
+            mysqlConn.commit()
+
             return render_template('success.html', passed_form_data=request.form)
     elif request.method == 'GET':
         return render_template('dbInteractionTemplates/addOwner.html', form = form)
