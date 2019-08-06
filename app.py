@@ -1,4 +1,4 @@
-#! /Users/ryagomes/Desktop/Workspace/PythonEnvironments/CS340Databases/bin/python
+#!/usr/bin/env python
 import database
 from flask import Flask, render_template, request, flash
 from forms import *
@@ -296,7 +296,7 @@ def DeleteOwnerPetRelationship():
 def ViewExpiredVaccinations():
     mysqlConn = database.connectMySql()
     with mysqlConn.cursor() as cursor:
-        sql='select * from vaccinations where expiration_date<=NOW();'
+        sql='select pets.name as pet_name, vaccinations.* from vaccinations, pets where pets.id=vaccinations.pet_id and expiration_date<=NOW();'
         cursor.execute(sql)
         result = cursor.fetchall()
         params = result

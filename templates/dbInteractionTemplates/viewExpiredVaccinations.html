@@ -1,13 +1,32 @@
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>Veterinary Practice CS 340</title>
-    </head>
-    <body>
-        <h3>{{params}}</h3>
+<head>
+  <meta charset="utf-8">
+  <title>Veterinary Practice CS 340</title>
+</head>
+<body>
 
+<h3>Expired Vaccinations</h3>
 
-    </body>
+<table>
+  <thead>
+    <th>Pet</th>
+    <th>Vaccine</th>
+    <th>Date Given</th>
+    <th>Expiration</th>
+  </thead>
+  <tbody>
+{% for row in params %}
+    <tr>
+      <td>{{ row.pet_name }}</td>
+      <td>{{ row.vaccine_name }}</td>
+      <td>{{ row.vaccination_date }}</td>
+      <td>{{ row.expiration_date }}</td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+
+</body>
 </html>
