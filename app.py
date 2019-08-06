@@ -36,7 +36,9 @@ def AddOwner():
                 cursor.execute(insert_stmt, data)
             mysqlConn.commit()
 
-            return render_template('success.html', passed_form_data=request.form)
+            passed_data = request.form.to_dict()
+            passed_data.pop("csrf_token")
+            return render_template('success.html', passed_form_data=passed_data)
     elif request.method == 'GET':
 
         mysqlConn = database.connectMySql()
@@ -71,7 +73,9 @@ def AddPet():
                 cursor.execute(insert_stmt, data)
             mysqlConn.commit()
 
-            return render_template('success.html', passed_form_data=request.form)
+            passed_data = request.form.to_dict()
+            passed_data.pop("csrf_token")
+            return render_template('success.html', passed_form_data=passed_data)
     elif request.method == 'GET':
 
         mysqlConn = database.connectMySql()
@@ -105,7 +109,9 @@ def AddVisit():
                 cursor.execute(insert_stmt, data)
             mysqlConn.commit()
 
-            return render_template('success.html', passed_form_data=request.form)
+            passed_data = request.form.to_dict()
+            passed_data.pop("csrf_token")
+            return render_template('success.html', passed_form_data=passed_data)
     elif request.method == 'GET':
 
         mysqlConn = database.connectMySql()
@@ -137,7 +143,9 @@ def AddOwnerPet():
                 cursor.execute(insert_stmt, data)
             mysqlConn.commit()
 
-            return render_template('success.html', passed_form_data=request.form)
+            passed_data = request.form.to_dict()
+            passed_data.pop("csrf_token")
+            return render_template('success.html', passed_form_data=passed_data)
     elif request.method == 'GET':
         return render_template('dbInteractionTemplates/addOwnerPet.html', form = form)
 
@@ -162,7 +170,9 @@ def UpdateVisitCheckin():
                 cursor.execute(update_stmt, data)
             mysqlConn.commit()
 
-            return render_template('success.html', passed_form_data=request.form)
+            passed_data = request.form.to_dict()
+            passed_data.pop("csrf_token")
+            return render_template('success.html', passed_form_data=passed_data)
     elif request.method == 'GET':
 
         mysqlConn = database.connectMySql()
@@ -194,7 +204,9 @@ def UpdateVisitNotes():
                 cursor.execute(update_stmt, data)
             mysqlConn.commit()
 
-            return render_template('success.html', passed_form_data=request.form)
+            passed_data = request.form.to_dict()
+            passed_data.pop("csrf_token")
+            return render_template('success.html', passed_form_data=passed_data)
     elif request.method == 'GET':
 
         mysqlConn = database.connectMySql()
@@ -234,7 +246,9 @@ def AddVaccinationRecord():
                 cursor.execute(insert_stmt, data)
             mysqlConn.commit()
 
-            return render_template('success.html', passed_form_data=request.form)
+            passed_data = request.form.to_dict()
+            passed_data.pop("csrf_token")
+            return render_template('success.html', passed_form_data=passed_data)
     elif request.method == 'GET':
         mysqlConn = database.connectMySql()
         with mysqlConn.cursor() as cursor:
@@ -254,7 +268,9 @@ def OwnerRecordLookup():
             flash('All fields are required.')
             return render_template('dbInteractionTemplates/ownerRecordLookup.html', form = form)
         else:
-            return render_template('success.html', passed_form_data=request.form)
+            passed_data = request.form.to_dict()
+            passed_data.pop("csrf_token")
+            return render_template('success.html', passed_form_data=passed_data)
     elif request.method == 'GET':
         return render_template('dbInteractionTemplates/ownerRecordLookup.html', form = form)
 
@@ -267,7 +283,9 @@ def PetLookup():
             flash('All fields are required.')
             return render_template('dbInteractionTemplates/petLookup.html', form = form)
         else:
-            return render_template('success.html', passed_form_data=request.form)
+            passed_data = request.form.to_dict()
+            passed_data.pop("csrf_token")
+            return render_template('success.html', passed_form_data=passed_data)
     elif request.method == 'GET':
         return render_template('dbInteractionTemplates/petLookup.html', form = form)
 
@@ -280,7 +298,9 @@ def PetsForOwner():
             flash('All fields are required.')
             return render_template('dbInteractionTemplates/petsForOwner.html', form = form)
         else:
-            return render_template('success.html', passed_form_data=request.form)
+            passed_data = request.form.to_dict()
+            passed_data.pop("csrf_token")
+            return render_template('success.html', passed_form_data=passed_data)
     elif request.method == 'GET':
         return render_template('dbInteractionTemplates/petsForOwner.html', form = form)
 
@@ -293,7 +313,9 @@ def OwnersForAPet():
             flash('All fields are required.')
             return render_template('dbInteractionTemplates/ownersForAPet.html', form = form)
         else:
-            return render_template('success.html', passed_form_data=request.form)
+            passed_data = request.form.to_dict()
+            passed_data.pop("csrf_token")
+            return render_template('success.html', passed_form_data=passed_data)
     elif request.method == 'GET':
         return render_template('dbInteractionTemplates/ownersForAPet.html', form = form)
 
@@ -306,7 +328,9 @@ def DeleteAVisit():
             flash('All fields are required.')
             return render_template('dbInteractionTemplates/deleteAVisit.html', form = form)
         else:
-            return render_template('success.html', passed_form_data=request.form)
+            passed_data = request.form.to_dict()
+            passed_data.pop("csrf_token")
+            return render_template('success.html', passed_form_data=passed_data)
     elif request.method == 'GET':
         return render_template('dbInteractionTemplates/deleteAVisit.html', form = form)
 
@@ -319,9 +343,31 @@ def DeleteAnOwner():
             flash('All fields are required.')
             return render_template('dbInteractionTemplates/deleteAnOwner.html', form = form)
         else:
-            return render_template('success.html', passed_form_data=request.form)
+
+            mysqlConn = database.connectMySql()
+            with mysqlConn.cursor() as cursor:
+                delete_stmt = (
+                    "DELETE FROM owners where id=%s;"
+                )
+
+                data = (request.form["owner_id"])
+
+                cursor.execute(delete_stmt, data)
+            mysqlConn.commit()
+
+            passed_data = request.form.to_dict()
+            passed_data.pop("csrf_token")
+            return render_template('success.html', passed_form_data=passed_data)
     elif request.method == 'GET':
-        return render_template('dbInteractionTemplates/deleteAnOwner.html', form = form)
+
+        mysqlConn = database.connectMySql()
+        with mysqlConn.cursor() as cursor:
+            sql='select * from owners;'
+            cursor.execute(sql)
+            result = cursor.fetchall()
+            params = result
+
+        return render_template('dbInteractionTemplates/deleteAnOwner.html', form = form, params=params)
 
 
 @app.route('/DeleteOwnerPetRelationship', methods = ['GET', 'POST'])
@@ -332,7 +378,9 @@ def DeleteOwnerPetRelationship():
             flash('All fields are required.')
             return render_template('dbInteractionTemplates/deleteOwnerPetRelationship.html', form = form)
         else:
-            return render_template('success.html', passed_form_data=request.form)
+            passed_data = request.form.to_dict()
+            passed_data.pop("csrf_token")
+            return render_template('success.html', passed_form_data=passed_data)
     elif request.method == 'GET':
         return render_template('dbInteractionTemplates/deleteOwnerPetRelationship.html', form = form)
 
