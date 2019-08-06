@@ -1,14 +1,16 @@
-# CS 340 Project Step 4:  Create HTML pages & DML + DDL files
+# CS 340 Project Step 4:  CREATE, READ, UPDATE, & DELETE Operations
 ## Ryan Gomes - gomesr@oregonstate.edu
 ## Kelley Reynolds - reynokel@oregonstate.edu
 
 # Step 4 URL
 http://flip1.engr.oregonstate.edu:8619/
 
-# Content from Step 3 and previous giving Database overview
+# Content from Step 3 giving Database overview
 
 ## Fixes based on Step 3 Feedback
-We did not receive any feedback from graders on step 3 so made no significant changes. All piazza feedback was also in support of the design we already had so there was nothing else to change for this step
+No DDL/modeling changes recommended. We did not receive any feedback from graders on step 3 so made no significant changes. All piazza feedback was also in support of the design we already had so there was nothing else to change for this step
+
+
 
 ## Fixes based on Step 2 Feedback
 We didn't have any additional upgrades to make from the draft version. attribute names were included in the ERD along with primary keys.
