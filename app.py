@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 import database
 from flask import Flask, render_template, request, flash
 from forms import *
@@ -39,7 +38,15 @@ def AddOwner():
 
             return render_template('success.html', passed_form_data=request.form)
     elif request.method == 'GET':
-        return render_template('dbInteractionTemplates/addOwner.html', form = form)
+
+        mysqlConn = database.connectMySql()
+        with mysqlConn.cursor() as cursor:
+            sql='select * from owners;'
+            cursor.execute(sql)
+            result = cursor.fetchall()
+            params = result
+
+        return render_template('dbInteractionTemplates/addOwner.html', form = form, params=params)
 
 
 @app.route('/AddPet', methods = ['GET', 'POST'])
@@ -66,7 +73,15 @@ def AddPet():
 
             return render_template('success.html', passed_form_data=request.form)
     elif request.method == 'GET':
-        return render_template('dbInteractionTemplates/addPet.html', form = form)
+
+        mysqlConn = database.connectMySql()
+        with mysqlConn.cursor() as cursor:
+            sql='select * from pets;'
+            cursor.execute(sql)
+            result = cursor.fetchall()
+            params = result
+
+        return render_template('dbInteractionTemplates/addPet.html', form = form, params=params)
 
 @app.route('/AddVisit', methods = ['GET', 'POST'])
 def AddVisit():
@@ -74,7 +89,7 @@ def AddVisit():
     if request.method == 'POST':
         if form.validate() == False:
             flash('All fields are required.')
-            return render_template('dbInteractionTemplates/addVisit.html', form = form)
+            return render_template('dbInteractionTemplates/addVisit.html', form = form, params=params)
         else:
 
             mysqlConn = database.connectMySql()
@@ -92,7 +107,14 @@ def AddVisit():
 
             return render_template('success.html', passed_form_data=request.form)
     elif request.method == 'GET':
-        return render_template('dbInteractionTemplates/addVisit.html', form = form)
+
+        mysqlConn = database.connectMySql()
+        with mysqlConn.cursor() as cursor:
+            sql='select * from visits;'
+            cursor.execute(sql)
+            result = cursor.fetchall()
+            params = result
+        return render_template('dbInteractionTemplates/addVisit.html', form = form, params=params)
 
 @app.route('/AddOwnerPet', methods = ['GET', 'POST'])
 def AddOwnerPet():
@@ -142,7 +164,15 @@ def UpdateVisitCheckin():
 
             return render_template('success.html', passed_form_data=request.form)
     elif request.method == 'GET':
-        return render_template('dbInteractionTemplates/updateVisitCheckin.html', form = form)
+
+        mysqlConn = database.connectMySql()
+        with mysqlConn.cursor() as cursor:
+            sql='select * from visits;'
+            cursor.execute(sql)
+            result = cursor.fetchall()
+            params = result
+
+        return render_template('dbInteractionTemplates/updateVisitCheckin.html', form = form, params=params)
 
 
 @app.route('/UpdateVisitNotes', methods = ['GET', 'POST'])
@@ -166,7 +196,15 @@ def UpdateVisitNotes():
 
             return render_template('success.html', passed_form_data=request.form)
     elif request.method == 'GET':
-        return render_template('dbInteractionTemplates/updateVisitNotes.html', form = form)
+
+        mysqlConn = database.connectMySql()
+        with mysqlConn.cursor() as cursor:
+            sql='select * from visits;'
+            cursor.execute(sql)
+            result = cursor.fetchall()
+            params = result
+
+        return render_template('dbInteractionTemplates/updateVisitNotes.html', form = form, params=params)
 
 
 
@@ -198,7 +236,14 @@ def AddVaccinationRecord():
 
             return render_template('success.html', passed_form_data=request.form)
     elif request.method == 'GET':
-        return render_template('dbInteractionTemplates/addVaccinationRecord.html', form = form)
+        mysqlConn = database.connectMySql()
+        with mysqlConn.cursor() as cursor:
+            sql='select * from vaccinations;'
+            cursor.execute(sql)
+            result = cursor.fetchall()
+            params = result
+
+        return render_template('dbInteractionTemplates/addVaccinationRecord.html', form = form, params=params)
 
 
 @app.route('/OwnerRecordLookup', methods = ['GET', 'POST'])

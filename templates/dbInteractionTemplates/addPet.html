@@ -35,5 +35,27 @@
 
              </fieldset>
           </form>
+
+          <strong>Current Pets</strong>
+          <table>
+            <thead>
+              <th>Id</th>
+              <th> Name</th>
+              <th>Birthday</th>
+              <th>Pet Type</th>
+              <th>Comment</th>
+            </thead>
+            <tbody>
+          {% for row in params %}
+              <tr>
+                <td>{{ row.id }}</td>
+                <td>{{ row.name }}</td>
+                <td>{{ row.birthdate }}</td>
+                <td>{{ row.pet_type }}</td>
+                <td>{{ row.comment }}</td>
+              </tr>
+          {% endfor %}
+            </tbody>
+          </table>
    </body>
 </html>

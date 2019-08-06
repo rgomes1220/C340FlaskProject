@@ -52,5 +52,29 @@
 
              </fieldset>
           </form>
+
+          <strong>Current Vaccinations</strong>
+          <table>
+            <thead>
+              <th>Id</th>
+              <th>PetID</th>
+              <th>Vaccine Name</th>
+              <th>Details</th>
+              <th>Vaccination Date</th>
+              <th>Expiration Date</th>
+            </thead>
+            <tbody>
+          {% for row in params %}
+              <tr>
+                <td>{{ row.id }}</td>
+                <td>{{ row.pet_id }}</td>
+                <td>{{ row.vaccine_name }}</td>
+                <td>{{ row.vaccine_details }}</td>
+                <td>{{ row.vaccination_date }}</td>
+                <td>{{ row.expiration_date }}</td>
+              </tr>
+          {% endfor %}
+            </tbody>
+          </table>
    </body>
 </html>

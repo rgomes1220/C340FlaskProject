@@ -8,7 +8,7 @@ http://flip1.engr.oregonstate.edu:8619/
 # Content from Step 3 giving Database overview
 
 ## Fixes based on Step 3 Feedback
-No DDL/modeling changes recommended. We did not receive any feedback from graders on step 3 so made no significant changes. All piazza feedback was also in support of the design we already had so there was nothing else to change for this step
+No DDL/modeling changes recommended. We did not receive any feedback from graders on step 3 so made no significant changes. All piazza feedback was also in support of the design we already had so there was nothing else to change for this step.
 
 
 
