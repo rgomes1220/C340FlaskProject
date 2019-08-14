@@ -1,7 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<h3>Pets</h3>
+<h3>
+  Pets
+  <a class="btn btn-sm btn-primary float-right" href="/add_pet">Add pet</a>
+</h3>
 
 <table class="table">
   <thead>
@@ -11,6 +14,7 @@
     <th>Owners</th>
     <th>Last Visit</th>
     <th>Next Visit</th>
+    <th></th>
   </thead>
   <tbody>
 {% for row in params %}
@@ -21,6 +25,7 @@
       <td>{{ row.owner_count }}</td>
       <td>{{ row.last_visit }}</td>
       <td>{{ row.next_visit }}</td>
+      <td><a href="/delete_pet/{{ row.id }}" class="btn btn-sm btn-danger">Delete</a></td>
     </tr>
 {% endfor %}
   </tbody>

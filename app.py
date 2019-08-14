@@ -8,7 +8,6 @@ app.config['SECRET_KEY'] = 'sample-secret-key'
 
 @app.route('/')
 def appIndex():
-    flash('Successfully added new owner')
     params = {'welcomeMessage': 'Hello and welcome to the Veterinary Practice Flask App!'}
     return render_template('index.html', params=params)
 
@@ -40,24 +39,16 @@ def add_owner():
             flash('Successfully added new owner')
             return redirect('/owners')
     elif request.method == 'GET':
-
-        mysqlConn = database.connectMySql()
-        with mysqlConn.cursor() as cursor:
-            sql='select * from owners;'
-            cursor.execute(sql)
-            result = cursor.fetchall()
-            params = result
-
-        return render_template('dbInteractionTemplates/add_owner.html', form = form, params=params)
+        return render_template('dbInteractionTemplates/add_owner.html', form = form)
 
 
-@app.route('/AddPet', methods = ['GET', 'POST'])
-def AddPet():
+@app.route('/add_pet', methods = ['GET', 'POST'])
+def add_pet():
     form = AddPetForm()
     if request.method == 'POST':
         if form.validate() == False:
             flash('All fields are required.')
-            return render_template('dbInteractionTemplates/addPet.html', form = form)
+            return render_template('dbInteractionTemplates/add_pet.html', form = form)
         else:
 
             mysqlConn = database.connectMySql()
@@ -75,17 +66,11 @@ def AddPet():
 
             passed_data = request.form.to_dict()
             passed_data.pop("csrf_token")
-            return render_template('success.html', passed_form_data=passed_data)
+            flash('Successfully added new pet')
+            return redirect('/pets')
     elif request.method == 'GET':
 
-        mysqlConn = database.connectMySql()
-        with mysqlConn.cursor() as cursor:
-            sql='select * from pets;'
-            cursor.execute(sql)
-            result = cursor.fetchall()
-            params = result
-
-        return render_template('dbInteractionTemplates/addPet.html', form = form, params=params)
+        return render_template('dbInteractionTemplates/add_pet.html', form = form)
 
 @app.route('/AddVisit', methods = ['GET', 'POST'])
 def AddVisit():
@@ -335,39 +320,26 @@ def DeleteAVisit():
         return render_template('dbInteractionTemplates/deleteAVisit.html', form = form)
 
 
-@app.route('/DeleteAnOwner', methods = ['GET', 'POST'])
-def DeleteAnOwner():
-    form = DeleteAnOwnerForm()
-    if request.method == 'POST':
-        if form.validate() == False:
-            flash('All fields are required.')
-            return render_template('dbInteractionTemplates/deleteAnOwner.html', form = form)
-        else:
+@app.route('/delete_owner/<owner_id>')
+def delete_owner(owner_id):
+    mysqlConn = database.connectMySql()
+    with mysqlConn.cursor() as cursor:
+        cursor.execute('delete from owners where id = %s', owner_id)
+    mysqlConn.commit()
+    flash('Owner deleted')
 
-            mysqlConn = database.connectMySql()
-            with mysqlConn.cursor() as cursor:
-                delete_stmt = (
-                    "DELETE FROM owners where id=%s;"
-                )
+    return redirect('/owners', code=302)
 
-                data = (request.form["owner_id"])
 
-                cursor.execute(delete_stmt, data)
-            mysqlConn.commit()
+@app.route('/delete_pet/<pet_id>')
+def delete_pet(pet_id):
+    mysqlConn = database.connectMySql()
+    with mysqlConn.cursor() as cursor:
+        cursor.execute('delete from pets where id = %s', pet_id)
+    mysqlConn.commit()
+    flash('Pet deleted')
 
-            passed_data = request.form.to_dict()
-            passed_data.pop("csrf_token")
-            return render_template('success.html', passed_form_data=passed_data)
-    elif request.method == 'GET':
-
-        mysqlConn = database.connectMySql()
-        with mysqlConn.cursor() as cursor:
-            sql='select * from owners;'
-            cursor.execute(sql)
-            result = cursor.fetchall()
-            params = result
-
-        return render_template('dbInteractionTemplates/deleteAnOwner.html', form = form, params=params)
+    return redirect('/pets', code=302)
 
 
 @app.route('/DeleteOwnerPetRelationship', methods = ['GET', 'POST'])
@@ -412,7 +384,7 @@ def owners():
     mysqlConn = database.connectMySql()
     with mysqlConn.cursor() as cursor:
         sql= """select
-                    first_name,
+                    id, first_name,
                     coalesce(last_name, '') as last_name,
                     (select count(*) from owners_pets where owners_pets.owner_id=owners.id) AS pet_count,
                     (select scheduled_time from visits where visits.owner_id=owners.id AND scheduled_time > NOW() and checkin_time IS NULL ORDER BY scheduled_time ASC LIMIT 1) AS next_visit,
@@ -434,6 +406,7 @@ def pets():
     mysqlConn = database.connectMySql()
     with mysqlConn.cursor() as cursor:
         sql= """select
+                    id,
                     name,
                     birthdate,
                     pet_type,
