@@ -21,15 +21,23 @@
                 {{ form.hidden_tag() }}
 
                 <div style = font-size:20px; font-weight:bold; margin-left:150px;>
-                   {{ form.ownerid.label }}<br>
-                   {{ form.ownerid }}
-                   <br>
+                  <label>Owner</label>
+                  <select name="ownerid">
+                    {% for owner in owners %}
+                      <option value="{{owner.id}}">{{owner.first_name}} {{owner.last_name}}</option>
+                    {% endfor %}
+                  </select>
+                  <br>
 
-                   {{ form.petid.label }}<br>
-                   {{ form.petid }}
-                   <br>
+                  <label>Pet</label>
+                  <select name="petid">
+                    {% for pet in pets %}
+                      <option value="{{pet.id}}">{{pet.name}}</option>
+                    {% endfor %}
+                  </select>
+                  <br>
 
-                   {{ form.submit }}
+                  {{ form.submit }}
                 </div>
 
              </fieldset>

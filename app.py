@@ -74,49 +74,47 @@ def add_pet():
 
 @app.route('/AddVisit', methods = ['GET', 'POST'])
 def AddVisit():
-    form = AddVisitForm()
     if request.method == 'POST':
-        if form.validate() == False:
-            flash('All fields are required.')
-            return render_template('dbInteractionTemplates/addVisit.html', form = form, params=params)
-        else:
-
-            mysqlConn = database.connectMySql()
-            with mysqlConn.cursor() as cursor:
-                insert_stmt = (
-                    "insert into visits ( owner_id, pet_id, scheduled_time)"
-                    "values ( %s, %s, %s);"
-                )
-                data = ((request.form["ownerid"]),
-                        (request.form["petid"]),
-                        request.form["scheduled_time"].replace("T"," "))
-
-                cursor.execute(insert_stmt, data)
-            mysqlConn.commit()
-
-            passed_data = request.form.to_dict()
-            passed_data.pop("csrf_token")
-            return render_template('success.html', passed_form_data=passed_data)
-    elif request.method == 'GET':
-
         mysqlConn = database.connectMySql()
         with mysqlConn.cursor() as cursor:
-            sql='select * from visits;'
-            cursor.execute(sql)
-            result = cursor.fetchall()
-            params = result
-        return render_template('dbInteractionTemplates/addVisit.html', form = form, params=params)
+            insert_stmt = (
+                "insert into visits ( owner_id, pet_id, scheduled_time)"
+                "values ( %s, %s, %s);"
+            )
+            data = ((request.form["owner_id"]),
+                    (request.form["pet_id"]),
+                    request.form["scheduled_time"])
+
+            cursor.execute(insert_stmt, data)
+        mysqlConn.commit()
+
+    mysqlConn = database.connectMySql()
+    with mysqlConn.cursor() as cursor:
+        cursor.execute('select * from visits')
+        visits = cursor.fetchall()
+
+        cursor.execute('select id, name from pets')
+        pets = cursor.fetchall()
+
+        cursor.execute('select id, first_name, last_name from owners')
+        owners = cursor.fetchall()
+    return render_template('dbInteractionTemplates/addVisit.html', visits=visits, pets=pets, owners=owners)
 
 @app.route('/AddOwnerPet', methods = ['GET', 'POST'])
 def AddOwnerPet():
+    mysqlConn = database.connectMySql()
     form = AddOwnerPetForm()
     if request.method == 'POST':
         if form.validate() == False:
             flash('All fields are required.')
-            return render_template('dbInteractionTemplates/addOwnerPet.html', form = form)
+            with mysqlConn.cursor() as cursor:
+                cursor.execute('select id, first_name, last_name from owners')
+                owners = cursor.fetchall()
+                cursor.execute('select id, name from pets')
+                pets = cursor.fetchall()
+            return render_template('dbInteractionTemplates/addOwnerPet.html', form=form, owners=owners, pets=pets)
         else:
 
-            mysqlConn = database.connectMySql()
             with mysqlConn.cursor() as cursor:
                 insert_stmt = (
                     "insert into owners_pets ( owner_id, pet_id)"
@@ -132,7 +130,12 @@ def AddOwnerPet():
             passed_data.pop("csrf_token")
             return render_template('success.html', passed_form_data=passed_data)
     elif request.method == 'GET':
-        return render_template('dbInteractionTemplates/addOwnerPet.html', form = form)
+        with mysqlConn.cursor() as cursor:
+            cursor.execute('select id, first_name, last_name from owners')
+            owners = cursor.fetchall()
+            cursor.execute('select id, name from pets')
+            pets = cursor.fetchall()
+        return render_template('dbInteractionTemplates/addOwnerPet.html', form = form, owners=owners, pets=pets)
 
 
 
