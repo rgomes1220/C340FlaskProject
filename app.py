@@ -390,11 +390,19 @@ def owners():
                     (select scheduled_time from visits where visits.owner_id=owners.id AND scheduled_time > NOW() and checkin_time IS NULL ORDER BY scheduled_time ASC LIMIT 1) AS next_visit,
                     (select checkin_time from visits where visits.owner_id=owners.id AND scheduled_time <= NOW() and checkin_time IS NOT NULL ORDER BY checkin_time DESC LIMIT 1) AS last_visit
                 from
-                    owners
-                order by
-                    last_name ASC, first_name ASC
-            """
-        cursor.execute(sql)
+                    owners"""
+        order_by = " order by last_name ASC, first_name ASC"
+        filter_id = request.args.get('id', '')
+        filter_name = request.args.get('name', '')
+        if filter_id != '':
+            flash('Filtering owners by ID')
+            cursor.execute(sql + ' where id = %s' + order_by, filter_id)
+        elif filter_name != '':
+            flash('Filtering owners by name')
+            cursor.execute(sql + ' where first_name like %s or last_name like %s' + order_by, ['%' + filter_name + '%', '%' + filter_name + '%'])
+        else:
+            cursor.execute(sql + order_by)
+
         result = cursor.fetchall()
         params = result
 
@@ -406,19 +414,24 @@ def pets():
     mysqlConn = database.connectMySql()
     with mysqlConn.cursor() as cursor:
         sql= """select
-                    id,
-                    name,
-                    birthdate,
-                    pet_type,
+                    id, name, birthdate, pet_type,
                     (select count(*) from owners_pets where owners_pets.pet_id=pets.id) AS owner_count,
                     (select scheduled_time from visits where visits.pet_id=pets.id AND scheduled_time > NOW() and checkin_time IS NULL ORDER BY scheduled_time ASC LIMIT 1) AS next_visit,
                     (select checkin_time from visits where visits.pet_id=pets.id AND scheduled_time <= NOW() and checkin_time IS NOT NULL ORDER BY checkin_time DESC LIMIT 1) AS last_visit
                 from
-                    pets
-                order by
-                    pet_type ASC, name ASC
-            """
-        cursor.execute(sql)
+                    pets"""
+        order_by = " order by pet_type ASC, name ASC"
+        filter_id = request.args.get('id', '')
+        filter_name = request.args.get('name', '')
+        if filter_id != '':
+            flash('Filtering pets by ID')
+            cursor.execute(sql + ' where id = %s' + order_by, filter_id)
+        elif filter_name != '':
+            flash('Filtering pets by name')
+            cursor.execute(sql + ' where name like %s' + order_by, '%' + filter_name + '%')
+        else:
+            cursor.execute(sql + order_by)
+
         result = cursor.fetchall()
         params = result
 
