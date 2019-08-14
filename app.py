@@ -395,10 +395,8 @@ def owners():
         filter_id = request.args.get('id', '')
         filter_name = request.args.get('name', '')
         if filter_id != '':
-            flash('Filtering owners by ID')
             cursor.execute(sql + ' where id = %s' + order_by, filter_id)
         elif filter_name != '':
-            flash('Filtering owners by name')
             cursor.execute(sql + ' where first_name like %s or last_name like %s' + order_by, ['%' + filter_name + '%', '%' + filter_name + '%'])
         else:
             cursor.execute(sql + order_by)
@@ -406,7 +404,7 @@ def owners():
         result = cursor.fetchall()
         params = result
 
-    return render_template('dbInteractionTemplates/owners.html', params=params)
+    return render_template('dbInteractionTemplates/owners.html', params=params, filter_name=filter_name)
 
 
 @app.route('/pets')
@@ -424,10 +422,8 @@ def pets():
         filter_id = request.args.get('id', '')
         filter_name = request.args.get('name', '')
         if filter_id != '':
-            flash('Filtering pets by ID')
             cursor.execute(sql + ' where id = %s' + order_by, filter_id)
         elif filter_name != '':
-            flash('Filtering pets by name')
             cursor.execute(sql + ' where name like %s' + order_by, '%' + filter_name + '%')
         else:
             cursor.execute(sql + order_by)
@@ -435,7 +431,7 @@ def pets():
         result = cursor.fetchall()
         params = result
 
-    return render_template('dbInteractionTemplates/pets.html', params=params)
+    return render_template('dbInteractionTemplates/pets.html', params=params, filter_name=filter_name)
 
 
 @app.route('/diagnostic')
