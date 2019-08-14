@@ -1,5 +1,5 @@
 import database
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, redirect
 from forms import *
 
 app = Flask(__name__)
@@ -8,18 +8,17 @@ app.config['SECRET_KEY'] = 'sample-secret-key'
 
 @app.route('/')
 def appIndex():
-    # return '<h3>Hello, world from Flask!</h3>'
+    flash('Successfully added new owner')
     params = {'welcomeMessage': 'Hello and welcome to the Veterinary Practice Flask App!'}
     return render_template('index.html', params=params)
 
 
-@app.route('/AddOwner', methods = ['GET', 'POST'])
-def AddOwner():
+@app.route('/add_owner', methods = ['GET', 'POST'])
+def add_owner():
     form = AddOwnerForm()
     if request.method == 'POST':
         if form.validate() == False:
-            flash('All fields are required.')
-            return render_template('dbInteractionTemplates/addOwner.html', form = form)
+            return render_template('dbInteractionTemplates/add_owner.html', form = form)
         else:
             # insert into owners values (null, :first_name, :last_name, :email, :phone);
 
@@ -38,7 +37,8 @@ def AddOwner():
 
             passed_data = request.form.to_dict()
             passed_data.pop("csrf_token")
-            return render_template('success.html', passed_form_data=passed_data)
+            flash('Successfully added new owner')
+            return redirect('/owners')
     elif request.method == 'GET':
 
         mysqlConn = database.connectMySql()
@@ -48,7 +48,7 @@ def AddOwner():
             result = cursor.fetchall()
             params = result
 
-        return render_template('dbInteractionTemplates/addOwner.html', form = form, params=params)
+        return render_template('dbInteractionTemplates/add_owner.html', form = form, params=params)
 
 
 @app.route('/AddPet', methods = ['GET', 'POST'])
@@ -385,7 +385,7 @@ def DeleteOwnerPetRelationship():
         return render_template('dbInteractionTemplates/deleteOwnerPetRelationship.html', form = form)
 
 
-@app.route('/ViewExpiredVaccinations')
+@app.route('/reports/expired_vaccinations')
 def ViewExpiredVaccinations():
     mysqlConn = database.connectMySql()
     with mysqlConn.cursor() as cursor:
@@ -394,7 +394,62 @@ def ViewExpiredVaccinations():
         result = cursor.fetchall()
         params = result
 
-    return render_template('dbInteractionTemplates/viewExpiredVaccinations.html', params=params)
+    return render_template('dbInteractionTemplates/expired_vaccinations.html', params=params)
+
+
+@app.route('/delete_vaccination/<vaccination_id>')
+def delete_vaccination(vaccination_id):
+    mysqlConn = database.connectMySql()
+    with mysqlConn.cursor() as cursor:
+        cursor.execute('delete from vaccinations where id = %s', vaccination_id)
+    mysqlConn.commit()
+
+    return redirect('/reports/expired_vaccinations', code=302)
+
+
+@app.route('/owners')
+def owners():
+    mysqlConn = database.connectMySql()
+    with mysqlConn.cursor() as cursor:
+        sql= """select
+                    first_name,
+                    coalesce(last_name, '') as last_name,
+                    (select count(*) from owners_pets where owners_pets.owner_id=owners.id) AS pet_count,
+                    (select scheduled_time from visits where visits.owner_id=owners.id AND scheduled_time > NOW() and checkin_time IS NULL ORDER BY scheduled_time ASC LIMIT 1) AS next_visit,
+                    (select checkin_time from visits where visits.owner_id=owners.id AND scheduled_time <= NOW() and checkin_time IS NOT NULL ORDER BY checkin_time DESC LIMIT 1) AS last_visit
+                from
+                    owners
+                order by
+                    last_name ASC, first_name ASC
+            """
+        cursor.execute(sql)
+        result = cursor.fetchall()
+        params = result
+
+    return render_template('dbInteractionTemplates/owners.html', params=params)
+
+
+@app.route('/pets')
+def pets():
+    mysqlConn = database.connectMySql()
+    with mysqlConn.cursor() as cursor:
+        sql= """select
+                    name,
+                    birthdate,
+                    pet_type,
+                    (select count(*) from owners_pets where owners_pets.pet_id=pets.id) AS owner_count,
+                    (select scheduled_time from visits where visits.pet_id=pets.id AND scheduled_time > NOW() and checkin_time IS NULL ORDER BY scheduled_time ASC LIMIT 1) AS next_visit,
+                    (select checkin_time from visits where visits.pet_id=pets.id AND scheduled_time <= NOW() and checkin_time IS NOT NULL ORDER BY checkin_time DESC LIMIT 1) AS last_visit
+                from
+                    pets
+                order by
+                    pet_type ASC, name ASC
+            """
+        cursor.execute(sql)
+        result = cursor.fetchall()
+        params = result
+
+    return render_template('dbInteractionTemplates/pets.html', params=params)
 
 
 @app.route('/diagnostic')

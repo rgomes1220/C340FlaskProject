@@ -1,20 +1,15 @@
-<!DOCTYPE html>
-
-<html lang="en" dir="ltr">
-<head>
-  <meta charset="utf-8">
-  <title>Veterinary Practice CS 340</title>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block content %}
 
 <h3>Expired Vaccinations</h3>
 
-<table>
+<table class="table">
   <thead>
     <th>Pet</th>
     <th>Vaccine</th>
     <th>Date Given</th>
     <th>Expiration</th>
+    <th style="width: 75px"></th>
   </thead>
   <tbody>
 {% for row in params %}
@@ -23,10 +18,10 @@
       <td>{{ row.vaccine_name }}</td>
       <td>{{ row.vaccination_date }}</td>
       <td>{{ row.expiration_date }}</td>
+      <td><a href="/delete_vaccination/{{ row.id }}" class="btn btn-sm btn-danger">Delete</a></td>
     </tr>
 {% endfor %}
   </tbody>
 </table>
 
-</body>
-</html>
+{% endblock %}
