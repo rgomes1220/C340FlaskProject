@@ -3,16 +3,29 @@
   <div class="text-center">
   <h3>{{params.welcomeMessage}}</h3>
   <p>
-    The following actions work fine, they are just not integrated with the UI yet (as in, sufficient for credit)
+    The following actions are possible in the website. They are listed here as an index and are accessible via the navbar.
   </p>
   </div>
 
   <ul class="list-group">
 
-    <li class="list-group-item list-group-item-warning"><a href="/PetsForOwner"> Find all the pets for an owner</a></li>
-    <li class="list-group-item list-group-item-warning"><a href="/OwnersForAPet"> Find all the owners for a pet</a></li>
-    <li class="list-group-item list-group-item-warning"><a href="/DeleteAVisit"> Delete a record for a visit </a></li>
-    <li class="list-group-item list-group-item-warning"><a href="/DeleteOwnerPetRelationship"> Unlink an owner from a pet</a></li>
+<li class="list-group-item list-group-item-success"><a href="/owners"> Add an owner  </a></li>
+<li class="list-group-item list-group-item-success"><a href="/pets"> Add an Pet  </a></li>
+<li class="list-group-item list-group-item-success"><a href="/AddVisit"> Add an Visit  </a></li>
+<li class="list-group-item list-group-item-success"><a href="/AddOwnerPet"> Add an Owner and Pet relationship  </a></li>
+<li class="list-group-item list-group-item-success"><a href="/UpdateVisitCheckin"> Update a visit record with a checkin time </a></li>
+<li class="list-group-item list-group-item-success"><a href="/UpdateVisitNotes"> Update notes for visit  </a></li>
+<li class="list-group-item list-group-item-success"><a href="/AddVaccinationRecord"> Add a vaccination record  </a></li>
+<li class="list-group-item list-group-item-success"><a href="/owners"> Lookup an owner record </a></li>
+<li class="list-group-item list-group-item-success"><a href="/pets"> Lookup the record for a pet by name </a></li>
+<li class="list-group-item list-group-item-success"><a href="/AddOwnerPet"> Find all the pets for an owner </a></li>
+<li class="list-group-item list-group-item-success"><a href="/AddOwnerPet"> Find all the owners for a pet </a></li>
+<li class="list-group-item list-group-item-success"><a href="/AddVisit"> Delete a record for a visit </a></li>
+<li class="list-group-item list-group-item-success"><a href="/owners"> Delete the record of an owner  </a></li>
+<li class="list-group-item list-group-item-success"><a href="/AddOwnerPet"> Unlink an owner from a pet </a></li>
+<li class="list-group-item list-group-item-success"><a href="/expired_vaccinations"> View Expired Vaccinations  </a></li>
+
+
   </ul>
 
 {% endblock %}

@@ -56,6 +56,7 @@
                   <td> {{row.pet_name}} </td>
                   <td> {{row.pet_type}} </td>
                   <td> {{row.comment}} </td>
+                  <td><a href="/delete_owner_pet/{{ row.id }}" class="btn btn-sm btn-danger">Delete</a></td>
               </tr>
           {% endfor %}
             </tbody>

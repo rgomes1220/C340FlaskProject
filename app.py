@@ -136,6 +136,7 @@ def AddOwnerPet():
             pets = cursor.fetchall()
 
             cursor.execute("""SELECT
+                                    owners_pets.id as id,
                                     concat(COALESCE(owners.first_name,' '), ' ', COALESCE(owners.last_name,' ')) as owner_name,
                                     pets.name as pet_name,
                                     pets.pet_type as pet_type,
@@ -362,6 +363,29 @@ def delete_pet(pet_id):
     flash('Pet deleted')
 
     return redirect('/pets', code=302)
+
+
+
+@app.route('/delete_visit/<visit_id>')
+def delete_visit(visit_id):
+    mysqlConn = database.connectMySql()
+    with mysqlConn.cursor() as cursor:
+        cursor.execute('delete from visits where id = %s', visit_id)
+    mysqlConn.commit()
+    flash('Visit Record deleted')
+
+    return redirect('/AddVisit', code=302)
+
+
+@app.route('/delete_owner_pet/<id>')
+def delete_owner_pet(id):
+    mysqlConn = database.connectMySql()
+    with mysqlConn.cursor() as cursor:
+        cursor.execute('delete from owners_pets where id = %s', id)
+    mysqlConn.commit()
+    flash('Owner Pet Relationship deleted')
+
+    return redirect('/AddOwnerPet', code=302)
 
 
 @app.route('/DeleteOwnerPetRelationship', methods = ['GET', 'POST'])
