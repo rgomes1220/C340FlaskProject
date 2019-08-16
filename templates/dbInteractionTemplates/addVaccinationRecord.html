@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title></title>
-    </head>
-    <body>
+{% extends "layout.html" %}
+{% block content %}
+
         <h2 style = "text-align: center;">Add a vaccination record</h2>
 
 
@@ -30,20 +26,26 @@
                 {{ form.hidden_tag() }}
 
                 <div style = font-size:20px; font-weight:bold; margin-left:150px;>
-                   {{ form.pet_id.label }}<br>
-                   {{ form.pet_id }}
+
+
+                   <label>Pet</label>
+                   <select name="pet_id">
+                     {% for pet in pets %}
+                       <option value="{{pet.id}}">{{pet.name}}</option>
+                     {% endfor %}
+                   </select>
                    <br>
 
-                   {{ form.vaccine_name.label }}<br>
+                   {{ form.vaccine_name.label }}
                    {{ form.vaccine_name }}
                    <br>
-                   {{ form.vaccine_details.label }}<br>
+                   {{ form.vaccine_details.label }}
                    {{ form.vaccine_details }}
                    <br>
-                   {{ form.vaccination_date.label }}<br>
+                   {{ form.vaccination_date.label }}
                    {{ form.vaccination_date }}
                    <br>
-                   {{ form.expiration_date.label }}<br>
+                   {{ form.expiration_date.label }} 
                    {{ form.expiration_date }}
                    <br>
 
@@ -54,7 +56,7 @@
           </form>
 
           <strong>Current Vaccinations</strong>
-          <table>
+          <table class="table">
             <thead>
               <th>Id</th>
               <th>PetID</th>
@@ -76,5 +78,5 @@
           {% endfor %}
             </tbody>
           </table>
-   </body>
-</html>
+
+{% endblock %}

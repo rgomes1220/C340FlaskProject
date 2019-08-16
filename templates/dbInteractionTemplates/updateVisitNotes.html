@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title></title>
-    </head>
-    <body>
+{% extends "layout.html" %}
+{% block content %}
+
         <h2 style = "text-align: center;">Update a visit with notes</h2>
 
 
@@ -36,27 +32,29 @@
           </form>
 
           <strong>Current Visits</strong>
-          <table>
+          <table class="table">
             <thead>
-              <th>Id</th>
-              <th> OwnerId</th>
-              <th>PetID</th>
-              <th>Checkin Time</th>
-              <th>Scheduled Time</th>
-              <th>Notes</th>
+                <th> id </th>
+                <th> owner_name </th>
+                <th> pet_name </th>
+                <th> pet_type </th>
+                <th> scheduled_time </th>
+                <th> checkin_time </th>
+                <th> visit_notes </th>
             </thead>
             <tbody>
           {% for row in params %}
               <tr>
-                <td>{{ row.id }}</td>
-                <td>{{ row.owner_id }}</td>
-                <td>{{ row.pet_id }}</td>
-                <td>{{ row.checkin_time }}</td>
-                <td>{{ row.scheduled_time }}</td>
-                <td>{{ row.notes }}</td>
+
+                <td> {{row.id}} </td>
+                <td> {{row.owner_name}} </td>
+                <td> {{row.pet_name}} </td>
+                <td> {{row.pet_type}} </td>
+                <td> {{row.scheduled_time}} </td>
+                <td> {{row.checkin_time}} </td>
+                <td> {{row.visit_notes}} </td>
               </tr>
           {% endfor %}
             </tbody>
           </table>
-   </body>
-</html>
+{% endblock %}
