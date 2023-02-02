@@ -8,5 +8,5 @@ PyMySQL==0.9.3
 PyYAML==5.1.1
 pyyml==0.0.2
 simplejson==3.16.0
-Werkzeug==0.15.4
+Werkzeug==0.15.5
 WTForms==2.2.1
